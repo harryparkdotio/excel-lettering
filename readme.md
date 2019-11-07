@@ -16,8 +16,8 @@ toColumnLetter(52); // 'BA'
 toColumnLetter(18277); // 'ZZZ'
 toColumnLetter(19009); // 'ABCD'
 
-toColumnNumber('A'); // 0)
-toColumnNumber('B'); // 1)
+toColumnNumber('A'); // 0
+toColumnNumber('B'); // 1
 toColumnNumber('AA'); // 26
 toColumnNumber('BA'); // 52
 toColumnNumber('ZZZ'); // 18277

@@ -1,3 +1,5 @@
+const ASCII_OFFSET = 65;
+
 /**
  * toColumnLetter
  *
@@ -20,13 +22,13 @@ export const toColumnLetter = (number: number): string => {
   const divisionResult = Math.floor(number / 26);
   const moduloResult = number % 26;
 
-  const nextLetter = String.fromCharCode(moduloResult + 65);
+  const nextLetter = String.fromCharCode(moduloResult + ASCII_OFFSET);
 
   if (divisionResult > 0) {
     return `${toColumnLetter(divisionResult - 1)}${nextLetter}`;
   }
 
-  return String.fromCharCode(moduloResult + 65);
+  return nextLetter;
 };
 
 /**
@@ -54,7 +56,8 @@ export const toColumnNumber = (letters: string): number => {
       .reverse()
       .reduce(
         (total, letter, idx) =>
-          total + Math.pow(26, idx) * (letter.charCodeAt(0) - 64),
+          total +
+          Math.pow(26, idx) * (letter.charCodeAt(0) - (ASCII_OFFSET - 1)),
         0
       ) - 1
   );
