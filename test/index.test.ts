@@ -40,6 +40,16 @@ describe('toColumnLetter', () => {
     }
   );
 
+  it('should throw if number is negative', () => {
+    expect(() => toColumnLetter(-1)).toThrowError(
+      'number must be greater than or equal to 0!'
+    );
+  });
+
+  it('should throw if number is not an integer', () => {
+    expect(() => toColumnLetter(1.1)).toThrowError('number must be an integer');
+  });
+
   it.each(letterNumberSets)(
     "should return '%s' when number = %d",
     (expected, number) => {
@@ -57,6 +67,22 @@ describe('toColumnNumber', () => {
       );
     }
   );
+
+  it('should throw if letters is an empty string', () => {
+    expect(() => toColumnNumber('')).toThrowError(
+      'letters must not be an empty string!'
+    );
+  });
+
+  it('should throw if letters contains non [a-zA-Z] characters', () => {
+    expect(() => toColumnNumber('abc1ABC')).toThrowError(
+      'letters must only contain [a-zA-Z] characters!'
+    );
+  });
+
+  it('should be case insensitive', () => {
+    expect(toColumnNumber('a')).toEqual(0);
+  });
 
   it.each(numberLetterSets)(
     "should return %d when letters = '%s'",

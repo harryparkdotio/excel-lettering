@@ -19,6 +19,14 @@ export const toColumnLetter = (number: number): string => {
     throw new Error('number must be a Number!');
   }
 
+  if (number < 0) {
+    throw new Error('number must be greater than or equal to 0!');
+  }
+
+  if (!Number.isInteger(number)) {
+    throw new Error('number must be an integer!');
+  }
+
   const divisionResult = Math.floor(number / 26);
   const moduloResult = number % 26;
 
@@ -50,8 +58,17 @@ export const toColumnNumber = (letters: string): number => {
     throw new Error('letters must be a String!');
   }
 
+  if (letters.length === 0) {
+    throw new Error('letters must not be an empty string!');
+  }
+
+  if (!/^[a-zA-Z]+$/.test(letters)) {
+    throw new Error('letters must only contain [a-zA-Z] characters!');
+  }
+
   return (
     letters
+      .toUpperCase()
       .split('')
       .reverse()
       .reduce(
